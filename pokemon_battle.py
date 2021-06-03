@@ -3,12 +3,14 @@ from random import randint
 class pokemon:
 
 
-    def __init__(self, name, lvl, hp, attack, defense, speed, type_1, type_2, move_1, move_2, move_3, move_4):    #to create a pokemon
+    def __init__(self, name, lvl, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, move_1, move_2, move_3, move_4):    #to create a pokemon
         self.name = name
         self.lvl = lvl
         self.hp = hp
         self.attack = attack
         self.defense = defense
+        self.sp_attack = sp_attack
+        self.sp_defense = sp_defense
         self.speed = speed
         self.type_1 = type_1
         self.type_2 = type_2
@@ -37,7 +39,7 @@ class pokemon:
         self.name = new_name
 
     def pkmn_stats(self):     #prints desired pokemon's stats
-      if self-type_2 != "none"
+      if self.type_2 != "none":
         print (f"name: {self.name} \nlevel: {self.lvl} \nhp: {self.hp} \nattack: {self.attack}\ndefense: {self.defense} \nspeed: {self.speed}\ntypes:\n\t{self.type_1}\n\t{self.type_2}\nmoves: \n\t{self.move_1.name}\n\t{self.move_2.name}\n\t{self.move_3.name}\n\t{self.move_4.name}\n")
       else:
         print (f"name: {self.name} \nlevel: {self.lvl} \nhp: {self.hp} \nattack: {self.attack}\ndefense: {self.defense} \nspeed: {self.speed}\ntypes:\n\t{self.type_1}\nmoves: \n\t{self.move_1.name}\n\t{self.move_2.name}\n\t{self.move_3.name}\n\t{self.move_4.name}\n")
@@ -811,13 +813,21 @@ class battles:
             move_number = self.move_3
         elif move_number == 4:
             move_number = self.move_4
+        
+
         acc = move_number.accuracy
         acc_check = randint(1, 100)
+
         if acc_check < acc:
             x = battles.typeChart_1(self, otherpokemon, move_number)
             y = battles.typeChart_2(self, otherpokemon, move_number)
             z = x * y
-            damage = (((((((((self.lvl/5+2)*self.attack*     move_number.power) / otherpokemon.defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
+
+            if move_number.attack_type == "physical":
+                damage = (((((((((self.lvl/5+2)*self.attack*     move_number.power) / otherpokemon.defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
+            elif move_number.attack_type == "special":
+                damage = (((((((((self.lvl/5+2)*self.sp_attack*     move_number.power) / otherpokemon.sp_defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
+
             rounded_damage = round(damage, 0)
             otherpokemon.hp = otherpokemon.hp - rounded_damage
             if otherpokemon.hp <= 0:
@@ -998,8 +1008,9 @@ class battles:
 
 class moveset:     #to create moves
 
-    def __init__(self, name, type, power, pp, accuracy):
+    def __init__(self, name, attack_type, type, power, pp, accuracy):
         self.name = name
+        self.attack_type = attack_type
         self.move_type = type
         self.power = power
         self.accuracy = accuracy
@@ -1008,22 +1019,21 @@ class moveset:     #to create moves
 
 
 # move list
-razorleaf = moveset("Razor Leaf", "grass", 55, 25, 95)
-flamethrower = moveset("Flamethrower", "fire", 90, 24, 100)
-water_pulse = moveset("Water pulse", "water", 60, 20, 100)
-tackle = moveset("Tackle", "normal", 40, 35, 100)
-scratch = moveset("Scratch", "normal", 40, 35, 100)
-dragon_pulse = moveset("Dragon Pulse", "dragon", 85, 16, 100)
+razorleaf = moveset("Razor Leaf", "physical", "grass", 55, 25, 95)
+flamethrower = moveset("Flamethrower", "special", "fire", 90, 24, 100)
+water_pulse = moveset("Water pulse", "special", "water", 60, 20, 100)
+tackle = moveset("Tackle", "physical", "normal", 40, 35, 100)
+scratch = moveset("Scratch", "physical", "normal", 40, 35, 100)
+dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100)
 
 #character list
-bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
+bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
 
-charmander = pokemon("Charmander", 5, 20, 11, 10, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
-
+charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
 charmander.insert_move(1, flamethrower)
 
-squirtle = pokemon("Squirtle", 5, 20, 11, 13, 10, "water", "none", water_pulse, tackle, tackle, tackle)
+squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle)
 
-dragapult = pokemon("Dragapult", 5, 25, 17, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
+dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
 
 battles.start_battle_1v1(charmander, squirtle)
