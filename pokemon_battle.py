@@ -1011,21 +1011,19 @@ class moveset:     #to create moves
 razorleaf = moveset("Razor Leaf", "grass", 55, 25, 95)
 flamethrower = moveset("Flamethrower", "fire", 90, 24, 100)
 water_pulse = moveset("Water pulse", "water", 60, 20, 100)
-tackle = moveset("Tackle", "normal", 40, 1, 100)
-scratch = moveset("scratch", "normal", 40, 1, 100)
+tackle = moveset("Tackle", "normal", 40, 35, 100)
+scratch = moveset("Scratch", "normal", 40, 35, 100)
+dragon_pulse = moveset("Dragon Pulse", "dragon", 85, 16, 100)
 
 #character list
-(bulbasaur) = pokemon("Bulbasaur", 5, 21, 11, 11, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
+bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
 
-bulbasaur.pkmn_stats()
-
-(charmander) = pokemon("Charmander", 5, 20, 11, 10, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
+charmander = pokemon("Charmander", 5, 20, 11, 10, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
 
 charmander.insert_move(1, flamethrower)
 
-charmander.pkmn_stats()
+squirtle = pokemon("Squirtle", 5, 20, 11, 13, 10, "water", "none", water_pulse, tackle, tackle, tackle)
 
-(squirtle) = pokemon("Squirtle", 5, 20, 11, 13, 10, "water", "none", water_pulse, tackle, tackle, tackle)
-
+dragapult = pokemon("Dragapult", 5, 25, 17, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
 
 battles.start_battle_1v1(charmander, squirtle)
