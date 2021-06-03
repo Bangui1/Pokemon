@@ -1001,25 +1001,25 @@ class moveset:     #to create moves
 
 
 
-#move list
-# razorleaf = moveset("Razor Leaf", "grass", 55, 25, 95)
-# flamethrower = moveset("Flamethrower", "fire", 90, 24, 100)
-# water_pulse = moveset("Water pulse", "water", 60, 20, 100)
-# tackle = moveset("Tackle", "normal", 40, 1, 100)
-# scratch = moveset("scratch", "normal", 40, 1, 100)
+# move list
+razorleaf = moveset("Razor Leaf", "grass", 55, 25, 95)
+flamethrower = moveset("Flamethrower", "fire", 90, 24, 100)
+water_pulse = moveset("Water pulse", "water", 60, 20, 100)
+tackle = moveset("Tackle", "normal", 40, 1, 100)
+scratch = moveset("scratch", "normal", 40, 1, 100)
 
-# #character list
-# (bulbasaur) = pokemon("Bulbasaur", 5, 21, 11, 11, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
+#character list
+(bulbasaur) = pokemon("Bulbasaur", 5, 21, 11, 11, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
 
-# bulbasaur.pkmn_stats()
+bulbasaur.pkmn_stats()
 
-# (charmander) = pokemon("Charmander", 5, 20, 11, 10, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
+(charmander) = pokemon("Charmander", 5, 20, 11, 10, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
 
-# charmander.insert_move(1, flamethrower)
+charmander.insert_move(1, flamethrower)
 
-# charmander.pkmn_stats()
+charmander.pkmn_stats()
 
-# (squirtle) = pokemon("Squirtle", 5, 20, 11, 13, 10, "water", "none", water_pulse, tackle, tackle, tackle)
+(squirtle) = pokemon("Squirtle", 5, 20, 11, 13, 10, "water", "none", water_pulse, tackle, tackle, tackle)
 
 
-# battles.start_battle_1v1(charmander, squirtle)
+battles.start_battle_1v1(charmander, squirtle)
