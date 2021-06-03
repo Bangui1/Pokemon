@@ -37,7 +37,10 @@ class pokemon:
         self.name = new_name
 
     def pkmn_stats(self):     #prints desired pokemon's stats
+      if self-type_2 != "none"
         print (f"name: {self.name} \nlevel: {self.lvl} \nhp: {self.hp} \nattack: {self.attack}\ndefense: {self.defense} \nspeed: {self.speed}\ntypes:\n\t{self.type_1}\n\t{self.type_2}\nmoves: \n\t{self.move_1.name}\n\t{self.move_2.name}\n\t{self.move_3.name}\n\t{self.move_4.name}\n")
+      else:
+        print (f"name: {self.name} \nlevel: {self.lvl} \nhp: {self.hp} \nattack: {self.attack}\ndefense: {self.defense} \nspeed: {self.speed}\ntypes:\n\t{self.type_1}\nmoves: \n\t{self.move_1.name}\n\t{self.move_2.name}\n\t{self.move_3.name}\n\t{self.move_4.name}\n")
 
 class battles:
     
@@ -892,6 +895,7 @@ class battles:
                     command = input()
                     if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                         choose_move = input(f"\n{otherpokemon.tell_my_moves()}\nWhat move will {otherpokemon.name} use: ")
+                        choose_move = battles.check_pp(otherpokemon, choose_move)
                         if choose_move == "1":
                             print(f"{otherpokemon.name} used {otherpokemon.move_1.name}! {battles.effectiveness(otherpokemon, self, 1)}")
                             battles.attack_damage(otherpokemon, self, 1)
@@ -929,6 +933,7 @@ class battles:
                     command = input()
                     if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                         choose_move = input(f"\n{otherpokemon.tell_my_moves()}\nWhat move will {otherpokemon.name} use: ")
+                        choose_move = battles.check_pp(otherpokemon, choose_move)
                         if choose_move == "1":
                             print(f"{otherpokemon.name} used {otherpokemon.move_1.name}! {battles.effectiveness(otherpokemon, self, 1)}")
                             battles.attack_damage(otherpokemon, self, 1)
@@ -963,6 +968,7 @@ class battles:
                     command = input()
                     if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                         choose_move = input(f"\n{self.tell_my_moves()}\nWhat move will {self.name} use: ")
+                        choose_move = battles.check_pp(self, choose_move)
                         if choose_move == "1":
                             print(f"{self.name} used {self.move_1.name}! {battles.effectiveness(self, otherpokemon, 1)}")
                             battles.attack_damage(self, otherpokemon, 1)
