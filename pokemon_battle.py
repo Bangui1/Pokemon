@@ -1,7 +1,7 @@
 from random import randint
 import pandas as pd
 
-typechart = pd.read_csv(r'D:\monos\Python\Pokemon\test_chart.csv') #cambiar el string por el path en donde tienen el type_chart.csv
+typechart = pd.read_csv(r'D:\Codigos\ayuda.csv') #cambiar el string por el path en donde tienen el type_chart.csv
 
 class Watcher:
 
@@ -35,11 +35,8 @@ class pokemon:
         self.type_1 = type_1
         self.type_2 = type_2
         self.move_1 = move_1
-
         self.move_2 = move_2
-        
         self.move_3 = move_3
-        
         self.move_4 = move_4
 
     def insert_move(self, move_number, pokemon_move):  #insert a move into a pokemon
@@ -197,6 +194,9 @@ class battles:
                 damage = (((((((((self.lvl/5+2)*self.attack*     move_number.power) / otherpokemon.defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
             elif move_number.attack_type == "special":
                 damage = (((((((((self.lvl/5+2)*self.sp_attack*     move_number.power) / otherpokemon.sp_defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
+            elif move_number.attack_type == "status":
+                #battles.status_move()
+                pass
 
             rounded_damage = int(round(damage, 0))
             otherpokemon.hp = otherpokemon.hp - rounded_damage
@@ -208,6 +208,9 @@ class battles:
         else:
             print (f"{self.name} missed!")
         
+    def status_move(self):
+        pass
+
     def check_pp(self, move):
         if move == "1":
             move_used = self.move_1
@@ -394,12 +397,13 @@ class moveset:     #to create moves
 
 
 # move list
-razorleaf = moveset("Razor Leaf", "physical", "grass", 55, 25, 95, "")
-flamethrower = moveset("Flamethrower", "special", "fire", 90, 24, 100, "")
-water_pulse = moveset("Water pulse", "special", "water", 60, 20, 100, "")
-tackle = moveset("Tackle", "physical", "normal", 40, 35, 100, "")
-scratch = moveset("Scratch", "physical", "normal", 40, 35, 100, "")
-dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "")
+razorleaf = moveset("Razor Leaf", "physical", "grass", 55, 25, 95, "none")
+flamethrower = moveset("Flamethrower", "special", "fire", 90, 24, 100, "none")
+water_pulse = moveset("Water pulse", "special", "water", 60, 20, 100, "none")
+tackle = moveset("Tackle", "physical", "normal", 40, 35, 100, "none")
+scratch = moveset("Scratch", "physical", "normal", 40, 35, 100, "none")
+dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "none")
+sing = moveset("Sing", "status", "normal", 0, 16, 55, "sleep")
 
 #character list
 bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf)
@@ -407,4 +411,4 @@ charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", sc
 squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle)
 dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
 
-print(battles.start_battle_1v1(charmander, squirtle))
+battles.start_battle_1v1(charmander, squirtle)
