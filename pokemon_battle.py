@@ -1,4 +1,7 @@
 from random import randint
+import pandas as pd
+
+typechart = pd.read_csv(r'D:\monos\Python\Pokemon\test_chart.csv') #cambiar el string por el path en donde tienen el type_chart.csv
 
 class Watcher:
 
@@ -63,741 +66,91 @@ class pokemon:
 
 class battles:
     
-    def typeChart_1(self, otherpokemon, move_number):                
-        if move_number.move_type == "normal" and otherpokemon.type_1 == "rock":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "normal" and otherpokemon.type_1 == "ghost":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "normal" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "water":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "grass":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "ice":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "bug":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "rock":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "dragon":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_1 == "steel":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "fire":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "water":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "grass":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "ground":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "rock":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_1 == "dragon":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "water":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "electric":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "grass":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "ground":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "flying":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_1 == "dragon":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "water":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "grass":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "poison":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "ground":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "flying":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "bug":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "rock":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "dragon":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "water":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "grass":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "ice":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "ground":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "flying":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "dragon":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "normal":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "ice":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "poison":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "flying":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "psychic":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "bug":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "rock":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "ghost":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "dark":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "steel":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_1 == "fairy":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "grass":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "poison":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "ground":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "rock":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "ghost":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "steel":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_1 == "fairy":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "fire":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "electric":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "grass":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "poison":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "flying":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "bug":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "rock":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_1 == "steel":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "electric":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "grass":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "fighting":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "bug":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "rock":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "electric":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_1 == "fighting":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_1 == "poison":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_1 == "psychic":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_1 == "dark":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "grass":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "fighting":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "poison":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "flying":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "psychic":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "ghost":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "dark":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_1 == "fairy":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "fire":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "ice":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "fighting":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "ground":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "flying":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "bug":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_1 == "normal":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_1 == "psychic":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_1 == "ghost":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_1 == "dark":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_1 == "dragon":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_1 == "fairy":
-            typeCheck = 0
-            return typeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_1 == "fighting":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_1 == "psychic":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_1 == "ghost":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_1 == "dark":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_1 == "fairy":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "water":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "electric":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "ice":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "rock":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_1 == "fairy":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "fire":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "fighting":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "poison":
-            typeCheck = 1/2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "ghost":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "dark":
-            typeCheck = 2
-            return typeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_1 == "steel":
-            typeCheck = 1/2
-            return typeCheck
-        else:
-            typeCheck = 1
-            return typeCheck
+    def typeChart_1 (self, otherpokemon, move_number):
+        if move_number.move_type == "normal":
+            a_type = 0
+        elif move_number.move_type == "fire":
+            a_type = 1
+        elif move_number.move_type == "water":
+            a_type = 2
+        elif move_number.move_type == "electric":
+            a_type = 3
+        elif move_number.move_type == "grass":
+            a_type = 4
+        elif move_number.move_type == "ice":
+            a_type = 5
+        elif move_number.move_type == "fighting":
+            a_type = 6
+        elif move_number.move_type == "poison":
+            a_type = 7
+        elif move_number.move_type == "ground":
+            a_type = 8
+        elif move_number.move_type == "flying":
+            a_type = 9
+        elif move_number.move_type == "psychic":
+            a_type = 10
+        elif move_number.move_type == "bug":
+            a_type = 11
+        elif move_number.move_type == "rock":
+            a_type = 12
+        elif move_number.move_type == "ghost":
+            a_type = 13
+        elif move_number.move_type == "dragon":
+            a_type = 14
+        elif move_number.move_type == "dark":
+            a_type = 15
+        elif move_number.move_type == "steel":
+            a_type = 16
+        elif move_number.move_type == "fairy":
+            a_type = 17
 
-    def typeChart_2(self, otherpokemon, move_number):                
-        if move_number.move_type == "normal" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "normal" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "normal" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "ice":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fire" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "water" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "electric":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "electric" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "grass" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "ice":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ice" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "normal":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "ice":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "psychic":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fighting" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "poison" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "electric":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ground" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "electric":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "electric":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "flying" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_2 == "psychic":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "psychic" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "grass":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "psychic":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "bug" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "ice":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "ground":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "flying":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "bug":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "rock" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_2 == "normal":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_2 == "psychic":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "ghost" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_2 == "dragon":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "dragon" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 0
-            return otherTypeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_2 == "psychic":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "dark" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "water":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "electric":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "ice":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "rock":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "steel" and otherpokemon.type_2 == "fairy":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "fire":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "fighting":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "poison":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "ghost":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "dark":
-            otherTypeCheck = 2
-            return otherTypeCheck
-        elif move_number.move_type == "fairy" and otherpokemon.type_2 == "steel":
-            otherTypeCheck = 1/2
-            return otherTypeCheck
+        z = typechart[otherpokemon.type_1][a_type]
+        return z
+
+    def typeChart_2 (self, otherpokemon, move_number):
+        if move_number.move_type == "normal":
+            a_type = 0
+        elif move_number.move_type == "fire":
+            a_type = 1
+        elif move_number.move_type == "water":
+            a_type = 2
+        elif move_number.move_type == "electric":
+            a_type = 3
+        elif move_number.move_type == "grass":
+            a_type = 4
+        elif move_number.move_type == "ice":
+            a_type = 5
+        elif move_number.move_type == "fighting":
+            a_type = 6
+        elif move_number.move_type == "poison":
+            a_type = 7
+        elif move_number.move_type == "ground":
+            a_type = 8
+        elif move_number.move_type == "flying":
+            a_type = 9
+        elif move_number.move_type == "psychic":
+            a_type = 10
+        elif move_number.move_type == "bug":
+            a_type = 11
+        elif move_number.move_type == "rock":
+            a_type = 12
+        elif move_number.move_type == "ghost":
+            a_type = 13
+        elif move_number.move_type == "dragon":
+            a_type = 14
+        elif move_number.move_type == "dark":
+            a_type = 15
+        elif move_number.move_type == "steel":
+            a_type = 16
+        elif move_number.move_type == "fairy":
+            a_type = 17
+        
+        
+        if otherpokemon.type_2 != "none":
+            z = typechart[otherpokemon.type_2][a_type]
         else:
-            otherTypeCheck = 1
-            return otherTypeCheck
+            z = 1
+        return z
     
     def effectiveness(self, otherpokemon, move_number):
         if move_number == 1:
