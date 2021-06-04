@@ -1,5 +1,22 @@
 from random import randint
 
+class Watcher:
+
+    def __init__(self, value):
+        self.variable = value
+    
+    def set_value(self, new_value):
+        if self.variable != new_value:
+            self.pre_change()
+            self.variable = new_value
+            self.post_change()
+    
+    def pre_change(self):
+        pass # do stuff before variable is about to be changed
+        
+    def post_change(self):
+        pass # do stuff right after variable has changed
+
 class pokemon:
 
 
@@ -796,7 +813,7 @@ class battles:
         z = x * y        
         if z > 1:
             return "It's super effective!"
-        elif z < 1:
+        elif z < 1 and z > 0:
             return "It's not very effective..."
         elif z == 0:
             return "Has no effect!"
@@ -828,12 +845,12 @@ class battles:
             elif move_number.attack_type == "special":
                 damage = (((((((((self.lvl/5+2)*self.sp_attack*     move_number.power) / otherpokemon.sp_defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
 
-            rounded_damage = round(damage, 0)
+            rounded_damage = int(round(damage, 0))
             otherpokemon.hp = otherpokemon.hp - rounded_damage
             if otherpokemon.hp <= 0:
                 otherpokemon.hp = 0
                 return otherpokemon.hp
-            print(f"{otherpokemon.name} has {otherpokemon.hp}hp left!")
+            print(f"{otherpokemon.name} has {otherpokemon.hp} hp left!")
             return otherpokemon.hp
         else:
             print (f"{self.name} missed!")
@@ -857,7 +874,8 @@ class battles:
             move = "0"
             return move
 
-    def start_battle_1v1(self, otherpokemon):  
+    def start_battle_1v1(self, otherpokemon):
+        turn = Watcher(1)
         attacker = input("tell me your name, attacker: ")
         defender = input("tell me your name, defender: ")
         print(f"{self.name} is attacking {otherpokemon.name}!")
@@ -893,11 +911,11 @@ class battles:
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
                 elif otherpokemon.hp <= 0:
                     print(f"\n{otherpokemon.name} fainted!")
                     print(f"End of the battle! winner: {attacker.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
                 o = 0
                 while o == 0:
                     
@@ -927,12 +945,13 @@ class battles:
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
                 elif otherpokemon.hp <= 0:
                     print(f"\n{otherpokemon.name} fainted!")
                     print(f"End of the battle! winner: {attacker.title()}!")
-                    return "FIN DE LA BATALLA"
-
+                    return turn.variable
+                
+                turn.set_value(turn.variable +1)
         else:
             #empieza el defensor
             while (self.hp >= 0) or (otherpokemon.hp >= 0):
@@ -965,11 +984,11 @@ class battles:
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
                 elif otherpokemon.hp <= 0:
                     print(f"\n{otherpokemon.name} fainted!")
                     print(f"End of the battle! winner: {attacker.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
 
                 i = 0
                 while i == 0:
@@ -1000,40 +1019,39 @@ class battles:
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
                 elif otherpokemon.hp <= 0:
                     print(f"\n{otherpokemon.name} fainted!")
                     print(f"End of the battle! winner: {attacker.title()}!")
-                    return "FIN DE LA BATALLA"
+                    return turn.variable
+                
+                turn.set_value(turn.variable+1)
 
 class moveset:     #to create moves
 
-    def __init__(self, name, attack_type, type, power, pp, accuracy):
+    def __init__(self, name, attack_type, type, power, pp, accuracy, effect):
         self.name = name
         self.attack_type = attack_type
         self.move_type = type
         self.power = power
         self.accuracy = accuracy
         self.pp = pp
+        self.effect = effect
 
 
 
 # move list
-razorleaf = moveset("Razor Leaf", "physical", "grass", 55, 25, 95)
-flamethrower = moveset("Flamethrower", "special", "fire", 90, 24, 100)
-water_pulse = moveset("Water pulse", "special", "water", 60, 20, 100)
-tackle = moveset("Tackle", "physical", "normal", 40, 35, 100)
-scratch = moveset("Scratch", "physical", "normal", 40, 35, 100)
-dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100)
+razorleaf = moveset("Razor Leaf", "physical", "grass", 55, 25, 95, "")
+flamethrower = moveset("Flamethrower", "special", "fire", 90, 24, 100, "")
+water_pulse = moveset("Water pulse", "special", "water", 60, 20, 100, "")
+tackle = moveset("Tackle", "physical", "normal", 40, 35, 100, "")
+scratch = moveset("Scratch", "physical", "normal", 40, 35, 100, "")
+dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "")
 
 #character list
-bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", razorleaf, razorleaf, razorleaf, razorleaf)
-
-charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", razorleaf, flamethrower, scratch, flamethrower)
-charmander.insert_move(1, flamethrower)
-
+bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf)
+charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower)
 squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle)
-
 dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
 
-battles.start_battle_1v1(charmander, squirtle)
+print(battles.start_battle_1v1(charmander, squirtle))
