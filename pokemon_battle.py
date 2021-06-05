@@ -1,7 +1,7 @@
 from random import randint
 import pandas as pd
 
-typechart = pd.read_csv(r'D:\Codigos\ayuda.csv') #cambiar el string por el path en donde tienen el type_chart.csv
+typechart = pd.read_csv(r'D:\Codigos\ayuda.csv', index_col= "att/def") #cambiar el string por el path en donde tienen el type_chart.csv
 
 class Watcher:
 
@@ -64,87 +64,14 @@ class pokemon:
 class battles:
     
     def typeChart_1 (self, otherpokemon, move_number):
-        if move_number.move_type == "normal":
-            a_type = 0
-        elif move_number.move_type == "fire":
-            a_type = 1
-        elif move_number.move_type == "water":
-            a_type = 2
-        elif move_number.move_type == "electric":
-            a_type = 3
-        elif move_number.move_type == "grass":
-            a_type = 4
-        elif move_number.move_type == "ice":
-            a_type = 5
-        elif move_number.move_type == "fighting":
-            a_type = 6
-        elif move_number.move_type == "poison":
-            a_type = 7
-        elif move_number.move_type == "ground":
-            a_type = 8
-        elif move_number.move_type == "flying":
-            a_type = 9
-        elif move_number.move_type == "psychic":
-            a_type = 10
-        elif move_number.move_type == "bug":
-            a_type = 11
-        elif move_number.move_type == "rock":
-            a_type = 12
-        elif move_number.move_type == "ghost":
-            a_type = 13
-        elif move_number.move_type == "dragon":
-            a_type = 14
-        elif move_number.move_type == "dark":
-            a_type = 15
-        elif move_number.move_type == "steel":
-            a_type = 16
-        elif move_number.move_type == "fairy":
-            a_type = 17
-
-        z = typechart[otherpokemon.type_1][a_type]
+        
+        z = typechart[otherpokemon.type_1][move_number.move_type]
         return z
 
-    def typeChart_2 (self, otherpokemon, move_number):
-        if move_number.move_type == "normal":
-            a_type = 0
-        elif move_number.move_type == "fire":
-            a_type = 1
-        elif move_number.move_type == "water":
-            a_type = 2
-        elif move_number.move_type == "electric":
-            a_type = 3
-        elif move_number.move_type == "grass":
-            a_type = 4
-        elif move_number.move_type == "ice":
-            a_type = 5
-        elif move_number.move_type == "fighting":
-            a_type = 6
-        elif move_number.move_type == "poison":
-            a_type = 7
-        elif move_number.move_type == "ground":
-            a_type = 8
-        elif move_number.move_type == "flying":
-            a_type = 9
-        elif move_number.move_type == "psychic":
-            a_type = 10
-        elif move_number.move_type == "bug":
-            a_type = 11
-        elif move_number.move_type == "rock":
-            a_type = 12
-        elif move_number.move_type == "ghost":
-            a_type = 13
-        elif move_number.move_type == "dragon":
-            a_type = 14
-        elif move_number.move_type == "dark":
-            a_type = 15
-        elif move_number.move_type == "steel":
-            a_type = 16
-        elif move_number.move_type == "fairy":
-            a_type = 17
-        
+    def typeChart_2 (self, otherpokemon, move_number):                
         
         if otherpokemon.type_2 != "none":
-            z = typechart[otherpokemon.type_2][a_type]
+            z = typechart[otherpokemon.type_2][move_number.move_type]
         else:
             z = 1
         return z
