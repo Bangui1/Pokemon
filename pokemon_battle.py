@@ -23,7 +23,7 @@ class Watcher:
 class pokemon:
 
 
-    def __init__(self, name, lvl, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, move_1, move_2, move_3, move_4):    #to create a pokemon
+    def __init__(self, name, lvl, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, move_1, move_2, move_3, move_4, status_effect, status_time):    #to create a pokemon
         self.name = name
         self.lvl = lvl
         self.hp = hp
@@ -38,6 +38,8 @@ class pokemon:
         self.move_2 = move_2
         self.move_3 = move_3
         self.move_4 = move_4
+        self.status_effect = status_effect
+        self.status_time = status_time
 
     def insert_move(self, move_number, pokemon_move):  #insert a move into a pokemon
         if move_number == 1:
@@ -84,18 +86,21 @@ class battles:
         elif move_number == 3:
             move_number = self.move_3
         elif move_number == 4:
-            move_number = self.move_4     
-        x = battles.typeChart_1(self, otherpokemon, move_number)
-        y = battles.typeChart_2(self, otherpokemon, move_number)        
-        z = x * y        
-        if z > 1:
-            return "It's super effective!"
-        elif z < 1 and z > 0:
-            return "It's not very effective..."
-        elif z == 0:
-            return "Has no effect!"
+            move_number = self.move_4 
+        if move_number.attack_type == "status":
+            pass
         else:
-            return ""
+            x = battles.typeChart_1(self, otherpokemon, move_number)
+            y = battles.typeChart_2(self, otherpokemon, move_number)        
+            z = x * y        
+            if z > 1:
+                return "It's super effective!"
+            elif z < 1 and z > 0:
+                return "It's not very effective..."
+            elif z == 0:
+                return "Has no effect!"
+            else:
+                return ""
 
     def attack_damage(self, otherpokemon, move_number):   #calculates the damage of an attack
         
@@ -108,7 +113,6 @@ class battles:
         elif move_number == 4:
             move_number = self.move_4
         
-
         acc = move_number.accuracy
         acc_check = randint(1, 100)
 
@@ -116,14 +120,13 @@ class battles:
             x = battles.typeChart_1(self, otherpokemon, move_number)
             y = battles.typeChart_2(self, otherpokemon, move_number)
             z = x * y
-
             if move_number.attack_type == "physical":
                 damage = (((((((((self.lvl/5+2)*self.attack*     move_number.power) / otherpokemon.defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
             elif move_number.attack_type == "special":
                 damage = (((((((((self.lvl/5+2)*self.sp_attack*     move_number.power) / otherpokemon.sp_defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
             elif move_number.attack_type == "status":
-                #battles.status_move()
-                pass
+                battles.status_move(move_number)
+
 
             rounded_damage = int(round(damage, 0))
             otherpokemon.hp = otherpokemon.hp - rounded_damage
@@ -135,9 +138,20 @@ class battles:
         else:
             print (f"{self.name} missed!")
         
-    def status_move(self):
-        pass
-
+    def status_move(self, move_number):
+        if self.status_time <= 0:
+            #tiene que existir una funcion para los status moves que son acumulables, ej: "Growl"
+            if move_number.effect == "sleep":
+                affected_time = randint(1, 7)
+                self.status_time = affected_time
+                self.status_effect = move_number.effect
+                return move_number.effect
+            else:
+                pass
+        else:
+            #tiene que existir una funcion para los status moves que son acumulables, ej: "Growl"
+            pass
+       
     def check_pp(self, move):
         if move == "1":
             move_used = self.move_1
@@ -333,9 +347,9 @@ dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "none")
 sing = moveset("Sing", "status", "normal", 0, 16, 55, "sleep")
 
 #character list
-bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf)
-charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower)
-squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle)
-dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
+bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf, "none", 0)
+charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower, "none", 0)
+squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle, "none", 0)
+dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse,  dragon_pulse,"none", 0)
 
 battles.start_battle_1v1(charmander, squirtle)
