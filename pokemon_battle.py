@@ -1,29 +1,35 @@
 from random import randint
 import pandas as pd
 
-typechart = pd.read_csv(r'D:\Codigos\ayuda.csv', index_col= "att/def") #cambiar el string por el path en donde tienen el type_chart.csv
+typechart = pd.read_csv(r'D:\Codigos\test_chart.csv', index_col= "att/def") #cambiar el string por el path en donde tienen el type_chart.csv
 
 class Watcher:
 
     def __init__(self, value):
         self.variable = value
     
-    def set_value(self, new_value):
+    def set_value(self, new_value, pokemon_, otherpokemon):
         if self.variable != new_value:
-            self.pre_change()
+            self.pre_change(pokemon_, otherpokemon)
             self.variable = new_value
-            self.post_change()
-    
-    def pre_change(self):
-        pass # do stuff before variable is about to be changed
+            self.post_change(pokemon_, otherpokemon)
+            
+    def pre_change(self, pokemon_, otherpokemon):
+        if pokemon_.status_time == 0:
+            pokemon_.status_effect = "none"
+        if otherpokemon.status_time == 0:
+            otherpokemon.status_effect = "none"
         
-    def post_change(self):
-        pass # do stuff right after variable has changed
+    def post_change(self, pokemon_, otherpokemon):
+        if pokemon_.status_time > 0:
+            pokemon_.status_time -= 1
+        if otherpokemon.status_time > 0:
+            otherpokemon.status_time -= 1
 
 class pokemon:
 
 
-    def __init__(self, name, lvl, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, move_1, move_2, move_3, move_4, status_effect, status_time):    #to create a pokemon
+    def __init__(self, name, lvl, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, move_1, move_2, move_3, move_4):    #to create a pokemon
         self.name = name
         self.lvl = lvl
         self.hp = hp
@@ -38,8 +44,8 @@ class pokemon:
         self.move_2 = move_2
         self.move_3 = move_3
         self.move_4 = move_4
-        self.status_effect = status_effect
-        self.status_time = status_time
+        self.status_effect = "none"
+        self.status_time = 0
 
     def insert_move(self, move_number, pokemon_move):  #insert a move into a pokemon
         if move_number == 1:
@@ -115,7 +121,8 @@ class battles:
         
         acc = move_number.accuracy
         acc_check = randint(1, 100)
-
+        move_number.pp -= 1
+        
         if acc_check < acc:
             x = battles.typeChart_1(self, otherpokemon, move_number)
             y = battles.typeChart_2(self, otherpokemon, move_number)
@@ -125,7 +132,7 @@ class battles:
             elif move_number.attack_type == "special":
                 damage = (((((((((self.lvl/5+2)*self.sp_attack*     move_number.power) / otherpokemon.sp_defense)/50)+2)*(     z     ))*randint(217, 255)))/255)
             elif move_number.attack_type == "status":
-                battles.status_move(move_number)
+                damage = battles.status_move(self, move_number, otherpokemon)
 
 
             rounded_damage = int(round(damage, 0))
@@ -137,21 +144,23 @@ class battles:
             return otherpokemon.hp
         else:
             print (f"{self.name} missed!")
+            return ""      
         
-    def status_move(self, move_number):
+    def status_move(self, move_number, otherpokemon):
         if self.status_time <= 0:
             #tiene que existir una funcion para los status moves que son acumulables, ej: "Growl"
             if move_number.effect == "sleep":
                 affected_time = randint(1, 7)
-                self.status_time = affected_time
-                self.status_effect = move_number.effect
-                return move_number.effect
+                otherpokemon.status_time = affected_time
+                otherpokemon.status_effect = "sleep"
+                print(f"{otherpokemon.name} is affected with {otherpokemon.status_effect}!")
+                return 0
             else:
                 pass
         else:
             #tiene que existir una funcion para los status moves que son acumulables, ej: "Growl"
-            pass
-       
+            return 0
+            
     def check_pp(self, move):
         if move == "1":
             move_used = self.move_1
@@ -161,15 +170,31 @@ class battles:
             move_used = self.move_3
         elif move == "4":
             move_used = self.move_4
+        else:
+            move_used = move
 
 
-        if move_used.pp > 0:
-            move_used.pp -= 1
+        if move == 0 or move == 1:
+            return move
+        elif move_used.pp > 0:
             return move
         elif move_used.pp <= 0: 
             print (f"{move_used.name} has no pp left")
-            move = "0"
+            move = 0
             return move
+
+    def check_status(self, move):
+        if move == 0:
+            move = 0
+            return move
+
+        if self.status_effect == "sleep":
+            print(f"{self.name} is sleeping!")
+            move = 1
+            return move
+        else:
+            return move
+
 
     def start_battle_1v1(self, otherpokemon):
         turn = Watcher(1)
@@ -187,6 +212,7 @@ class battles:
                     if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                         choose_move = input(f"\n{self.tell_my_moves()}\nWhat move will {self.name} use: ")
                         choose_move = battles.check_pp(self, choose_move)
+                        choose_move = battles.check_status(self, choose_move)
                         if choose_move == "1":
                             print(f"{self.name} used {self.move_1.name}! {battles.effectiveness(self, otherpokemon, 1)}")
                             battles.attack_damage(self, otherpokemon, 1)
@@ -202,6 +228,11 @@ class battles:
                         elif choose_move == "4":
                             print(f"{self.name} used {self.move_4.name}! {battles.effectiveness(self, otherpokemon, 4)}")
                             battles.attack_damage(self, otherpokemon, 4)
+                            i += 1
+                        elif choose_move == 0:
+                            print("Choose another move!")
+                        elif choose_move == 1:
+                            print("you cant move!")
                             i += 1
                         else:
                             print("wrong command")
@@ -221,6 +252,7 @@ class battles:
                     if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                         choose_move = input(f"\n{otherpokemon.tell_my_moves()}\nWhat move will {otherpokemon.name} use: ")
                         choose_move = battles.check_pp(otherpokemon, choose_move)
+                        choose_move = battles.check_status(otherpokemon, choose_move)
                         if choose_move == "1":
                             print(f"{otherpokemon.name} used {otherpokemon.move_1.name}! {battles.effectiveness(otherpokemon, self, 1)}")
                             battles.attack_damage(otherpokemon, self, 1)
@@ -237,6 +269,11 @@ class battles:
                             print(f"{otherpokemon.name} used {otherpokemon.move_4.name}! {battles.effectiveness(otherpokemon, self, 4)}")
                             battles.attack_damage(otherpokemon, self, 4)
                             o += 1
+                        elif choose_move == 0:
+                            print("Choose another move!")
+                        elif choose_move == 1:
+                            print("you cant move!")
+                            o += 1
                         else:
                             print("wrong command")
                 if self.hp <= 0:
@@ -248,7 +285,7 @@ class battles:
                     print(f"End of the battle! winner: {attacker.title()}!")
                     return turn.variable
                 
-                turn.set_value(turn.variable +1)
+                turn.set_value(turn.variable +1, self, otherpokemon)
         else:
             #empieza el defensor
             while (self.hp >= 0) or (otherpokemon.hp >= 0):
@@ -275,6 +312,11 @@ class battles:
                         elif choose_move == "4":
                             print(f"{otherpokemon.name} used {otherpokemon.move_4.name}! {battles.effectiveness(otherpokemon, self, 4)}")
                             battles.attack_damage(otherpokemon, self, 4)
+                            o += 1
+                        elif choose_move == 0:
+                            print("Choose another move!")
+                        elif choose_move == 1:
+                            print("you cant move!")
                             o += 1
                         else:
                             print("wrong command")
@@ -347,9 +389,9 @@ dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "none")
 sing = moveset("Sing", "status", "normal", 0, 16, 55, "sleep")
 
 #character list
-bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf, "none", 0)
-charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower, "none", 0)
-squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", water_pulse, tackle, tackle, tackle, "none", 0)
-dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse,  dragon_pulse,"none", 0)
+bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf)
+charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower)
+squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", sing, tackle, tackle, tackle)
+dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse,  dragon_pulse)
 
 battles.start_battle_1v1(charmander, squirtle)
