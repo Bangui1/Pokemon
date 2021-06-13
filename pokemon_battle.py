@@ -1,7 +1,7 @@
 from random import randint
 import pandas as pd
 
-typechart = pd.read_csv(r'D:\Codigos\test_chart.csv', index_col= "att/def") #cambiar el string por el path en donde tienen el type_chart.csv
+typechart = pd.read_csv(r'Pokemon\test_chart.csv',index_col="att/def") #cambiar el string por el path en donde tienen el type_chart.csv
 
 class Watcher:
 
@@ -199,11 +199,11 @@ class battles:
         else:
             return move
 
-    def attacker(self, otherpokemon, attacker):
+    def attack(self, otherpokemon, attacker):
         i = 0
         while i == 0:
             
-            print(f"\n{attacker.title()}, what would you like to do?")
+            print(f"\n{attacker.title()}, what would you like to do?\na.- Attack\nb.- Bag(not working)\nr.- Run(not working)\np.- Pokemon(not working)")
             command = input()
             if ((command.lower()) == "a") or ((command.lower()) == "attack"):
                 choose_move = input(f"\n{self.tell_my_moves()}\nWhat move will {self.name} use: ")
@@ -236,41 +236,41 @@ class battles:
                 print("wrong command")
 
 
-    def defender(self, otherpokemon, defender):
-        o = 0
-        while o == 0:
+    # def defender(self, otherpokemon, defender):
+    #     o = 0
+    #     while o == 0:
             
-            print(f"\n{defender.title()}, what would you like to do?")
-            command = input()
-            if ((command.lower()) == "a") or ((command.lower()) == "attack"):
-                choose_move = input(f"\n{otherpokemon.tell_my_moves()}\nWhat move will {otherpokemon.name} use: ")
-                choose_move = battles.check_pp(otherpokemon, choose_move)
-                choose_move = battles.check_status(otherpokemon, choose_move)
-                if choose_move == "1":
-                    print(f"{otherpokemon.name} used {otherpokemon.move_1.name}! {battles.effectiveness(otherpokemon, self, 1)}")
-                    battles.attack_damage(otherpokemon, self, 1)
-                    o += 1
-                elif choose_move == "2":
-                    print(f"{otherpokemon.name} used {otherpokemon.move_2.name}! {battles.effectiveness(otherpokemon, self, 2)}")
-                    battles.attack_damage(otherpokemon, self, 2)
-                    o += 1
-                elif choose_move == "3":
-                    print(f"{otherpokemon.name} used {otherpokemon.move_3.name}! {battles.effectiveness(otherpokemon, self, 3)}")
-                    battles.attack_damage(otherpokemon, self, 3)
-                    o += 1
-                elif choose_move == "4":
-                    print(f"{otherpokemon.name} used {otherpokemon.move_4.name}! {battles.effectiveness(otherpokemon, self, 4)}")
-                    battles.attack_damage(otherpokemon, self, 4)
-                    o += 1
-                elif choose_move == 0:
-                    print("Choose another move!")
-                elif choose_move == 1:
-                    print("your pokemon can't move!")
-                    o += 1
-                else:
-                    print("wrong command")
-            else:
-                print("wrong command")
+    #         print(f"\n{defender.title()}, what would you like to do?")
+    #         command = input()
+    #         if ((command.lower()) == "a") or ((command.lower()) == "attack"):
+    #             choose_move = input(f"\n{otherpokemon.tell_my_moves()}\nWhat move will {otherpokemon.name} use: ")
+    #             choose_move = battles.check_pp(otherpokemon, choose_move)
+    #             choose_move = battles.check_status(otherpokemon, choose_move)
+    #             if choose_move == "1":
+    #                 print(f"{otherpokemon.name} used {otherpokemon.move_1.name}! {battles.effectiveness(otherpokemon, self, 1)}")
+    #                 battles.attack_damage(otherpokemon, self, 1)
+    #                 o += 1
+    #             elif choose_move == "2":
+    #                 print(f"{otherpokemon.name} used {otherpokemon.move_2.name}! {battles.effectiveness(otherpokemon, self, 2)}")
+    #                 battles.attack_damage(otherpokemon, self, 2)
+    #                 o += 1
+    #             elif choose_move == "3":
+    #                 print(f"{otherpokemon.name} used {otherpokemon.move_3.name}! {battles.effectiveness(otherpokemon, self, 3)}")
+    #                 battles.attack_damage(otherpokemon, self, 3)
+    #                 o += 1
+    #             elif choose_move == "4":
+    #                 print(f"{otherpokemon.name} used {otherpokemon.move_4.name}! {battles.effectiveness(otherpokemon, self, 4)}")
+    #                 battles.attack_damage(otherpokemon, self, 4)
+    #                 o += 1
+    #             elif choose_move == 0:
+    #                 print("Choose another move!")
+    #             elif choose_move == 1:
+    #                 print("your pokemon can't move!")
+    #                 o += 1
+    #             else:
+    #                 print("wrong command")
+    #         else:
+    #             print("wrong command")
 
 
     def start_battle_1v1(self, otherpokemon):
@@ -281,8 +281,16 @@ class battles:
         if self.speed > otherpokemon.speed:
             # empieza el atacante
             while (self.hp != 0) or (otherpokemon.hp != 0):
-                battles.attacker(self, otherpokemon, attacker)
-                battles.defender(self, otherpokemon, defender)
+                battles.attack(self, otherpokemon, attacker)
+                if otherpokemon.hp <= 0:
+                    print(f"\n{otherpokemon.name} fainted!")
+                    print(f"End of the battle! winner: {attacker.title()}!")
+                    return turn.variable
+                elif self.hp <= 0:
+                    print(f"\n{self.name} fainted!")
+                    print(f"End of the battle! winner: {defender.title()}!")
+                    return turn.variable
+                battles.attack(otherpokemon, self, defender)
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
@@ -295,8 +303,16 @@ class battles:
         else:
             #empieza el defensor
             while (self.hp != 0) or (otherpokemon.hp != 0):
-                battles.defender(self, otherpokemon, attacker)
-                battles.attacker(self, otherpokemon, defender)
+                battles.attack(otherpokemon, self, attacker)
+                if otherpokemon.hp <= 0:
+                    print(f"\n{otherpokemon.name} fainted!")
+                    print(f"End of the battle! winner: {attacker.title()}!")
+                    return turn.variable
+                elif self.hp <= 0:
+                    print(f"\n{self.name} fainted!")
+                    print(f"End of the battle! winner: {defender.title()}!")
+                    return turn.variable
+                battles.attack(self, otherpokemon, defender)
                 if self.hp <= 0:
                     print(f"\n{self.name} fainted!")
                     print(f"End of the battle! winner: {defender.title()}!")
@@ -329,11 +345,14 @@ tackle = moveset("Tackle", "physical", "normal", 40, 35, 100, "none")
 scratch = moveset("Scratch", "physical", "normal", 40, 35, 100, "none")
 dragon_pulse = moveset("Dragon Pulse", "special", "dragon", 85, 16, 100, "none")
 sing = moveset("Sing", "status", "normal", 0, 16, 55, "sleep")
+ember = moveset("Ember", "special", "fire", 40, 25, 100, "none")
+slash = moveset("Slash", "physical", "normal", 70, 20, 100, "none")
+bubble = moveset("Bubble", "special", "water", 40, 30, 100, "none")
 
 #character list
 bulbasaur = pokemon("Bulbasaur", 5, 21, 11, 11, 13, 13, 11, "grass", "none", tackle, razorleaf, razorleaf, razorleaf)
-charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, scratch, flamethrower)
-squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", sing, tackle, tackle, tackle)
+charmander = pokemon("Charmander", 5, 20, 11, 10, 12, 11, 13, "fire", "none", scratch, flamethrower, ember, slash)
+squirtle = pokemon("Squirtle", 5, 20, 11, 13, 11, 12, 10, "water", "none", sing, bubble, water_pulse, tackle)
 dragapult = pokemon("Dragapult", 5, 25, 17, 14, 16, 14, 20, "dragon", "ghost", dragon_pulse, dragon_pulse, dragon_pulse, dragon_pulse)
 
 battles.start_battle_1v1(charmander, squirtle)
